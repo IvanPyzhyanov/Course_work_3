@@ -14,3 +14,13 @@ class MoviesService(BaseService):
     def get_all_directors(self):
         movies = MovieDAO(self._db_session).get_all()
         return MovieSchema(many=True).dump(movies)
+
+    def get_filter_movie(self, filter_args):
+        limit=0
+        offset=0
+        if filter_args.get("page"):
+            limit = current_app.config["ITEMS_PER_PAGE"]
+            offset = (filter_args.get("page") - 1) * limit
+        status = filter_args.get("status")
+        movies = MovieDAO(self._db_session).get_filter(limit=limit, offset=offset, status=status)
+        return MovieSchema(many=True).dump(movies)
