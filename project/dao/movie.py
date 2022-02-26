@@ -1,0 +1,34 @@
+from sqlalchemy.orm.scoping import scoped_session
+
+from project.dao.models import Movie
+
+
+class MovieDAO:
+    def __init__(self, session: scoped_session):
+        self._db_session = session
+
+    def get_by_id(self, pk):
+        return self._db_session.query(Movie).filter(Movie.id == pk).one_or_none()
+
+    def get_all(self):
+        return self._db_session.query(Movie).all()
+
+
+
+    # def create(self, data):
+    #     movies = Movie(**data)
+    #     self.session.add(movies)
+    #     self.session.commit()
+    #     return movies
+    #
+    # def update(self, movie):
+    #     self.session.add(movie)
+    #     self.session.commit()
+    #     return movie
+    #
+    #
+    # def delete(self, mid):
+    #     movie = self.get_one(mid)
+    #     self.session.delete(movie)
+    #     self.session.commit()
+    #     return "", 204
