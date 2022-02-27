@@ -5,7 +5,7 @@ import hmac
 import jwt
 import calendar
 
-from flask import current_app
+from flask import current_app, request
 from flask_restx import abort
 from project.exceptions import ItemNotFound
 
@@ -20,7 +20,10 @@ def generate_password_digest(password):
 
 
 def auth_check():
-    pass
+    if "Authorization" not in request.headers:
+        return False
+    token = request.headers["Authorization"].split("Bearer ")[-1]
+    return jwt_decode(token)
 
 
 def jwt_decode(token):

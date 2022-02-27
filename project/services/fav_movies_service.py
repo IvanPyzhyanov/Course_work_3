@@ -1,6 +1,10 @@
+from project.dao import FavoriteMovieDAO
+from project.exceptions import ItemNotFound
+from project.schemas import FavoriteMovieSchema
+from project.services.base import BaseService
 
 
-class FavoriteMoviesService(BaseService):
+class FavoriteMovieService(BaseService):
     def get_by_user_id(self, user_id):
         movies = FavoriteMovieDAO(self._db_session).get_by_user_id(user_id)
         if not movies:

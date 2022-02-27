@@ -1,6 +1,6 @@
 from flask_restx import abort, Namespace, Resource, reqparse
 from project.exceptions import ItemNotFound
-from project.services import FavoriteMoviesService
+from project.services import FavoriteMovieService
 from project.setup_db import db
 from project.tools.security import auth_required, auth_check
 
@@ -10,7 +10,7 @@ parser.add_argument('page', type=int)
 parser.add_argument('status', type=str)
 
 
-@favorite_movies_ns("/")
+@favorite_movies_ns.route("/")
 class FavoriteMoviesView(Resource):
     @auth_required
     @favorite_movies_ns.response(200, "OK")
@@ -18,7 +18,7 @@ class FavoriteMoviesView(Resource):
         """Get all favorite movies"""
         user_id = auth_check().get("id")
         try:
-            return FavoriteMoviesService(db.session).get_by_user_id(user_id)
+            return FavoriteMovieService(db.session).get_by_user_id(user_id)
         except ItemNotFound:
             abort(404, message="Movies not found")
 

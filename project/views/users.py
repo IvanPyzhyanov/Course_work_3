@@ -1,7 +1,7 @@
 from flask_restx import abort, Namespace, Resource, reqparse
 from flask import request
 from project.exceptions import ItemNotFound
-from project.services import UsersService
+from project.services import UserService
 from project.setup_db import db
 from project.tools.security import auth_required
 
@@ -19,8 +19,8 @@ class UsersView(Resource):
         """Get all users"""
         page = parser.parse_args().get("page")
         if page:
-            return UsersService(db.session).get_limit_users(page)
-        return UsersService(db.session).get_all_users()
+            return UserService(db.session).get_limit_users(page)
+        return UserService(db.session).get_all_users()
 
 
 @users_ns.route("/<int:user_id>")
@@ -31,7 +31,7 @@ class UserView(Resource):
     def get(self, user_id: int):
         """Get user by id"""
         try:
-            return UsersService(db.session).get_item_by_id(user_id)
+            return UserService(db.session).get_item_by_id(user_id)
         except ItemNotFound:
             abort(404, message="User not found")
 
@@ -43,7 +43,7 @@ class UserView(Resource):
         if not req_json.get("id"):
             req_json["id"] = user_id
         try:
-            return UsersService(db.session).update(req_json)
+            return UserService(db.session).update(req_json)
         except ItemNotFound:
             abort(400, message="User not found")
 
@@ -62,7 +62,7 @@ class UserPatchView(Resource):
         if not req_json.get('id'):
             req_json['id'] = user_id
         try:
-            return UsersService(db.session).update_pass(req_json)
+            return UserService(db.session).update_pass(req_json)
         except ItemNotFound:
             abort(400, message="User not found")
 
