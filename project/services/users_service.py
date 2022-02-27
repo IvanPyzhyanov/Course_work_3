@@ -11,7 +11,7 @@ class UserService(BaseService):
     def get_item_by_email(self, email):
         user = UserDAO(self._db_session).get_by_email(email)
         if not user:
-            raise ItemNotFound
+            return None
         return UserSchema().dump(user)
 
 

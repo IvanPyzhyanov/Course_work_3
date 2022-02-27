@@ -35,6 +35,9 @@ class AuthView(Resource):
 class AuthRegisterView(Resource):
     def post(self):
         req_json = request.json
+        if "email" in req_json:
+            u1 = UserService(db.session).get_item_by_email(email = req_json["email"])
+            return UserService(db.session).create(req_json)
         if not req_json:
             abort(400, message="Bad request")
-        return UserService(db.session).create(req_json)
+        return "", 404
