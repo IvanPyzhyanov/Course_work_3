@@ -2,6 +2,8 @@ import base64
 import datetime
 import hashlib
 import hmac
+import jwt
+import calendar
 
 from flask import current_app
 from flask_restx import abort
@@ -15,6 +17,10 @@ def generate_password_digest(password):
         salt=current_app.config["PWD_HASH_SALT"],
         iterations=current_app.config["PWD_HASH_ITERATIONS"],
     )
+
+
+def auth_check():
+    pass
 
 
 def jwt_decode(token):
@@ -58,7 +64,7 @@ def generate_token(data):
 def compare_password(password_hash, other_password):
     return hmac.compare_digest(
         base64.b64decode(password_hash),
-        hashlib.pbkdf2_hmac('sha256', other_password.encode('utf-8'), current_app.config["PWD_HASH_SALT"], current_app.config[****************])
+        hashlib.pbkdf2_hmac('sha256', other_password.encode('utf-8'), current_app.config["PWD_HASH_SALT"], current_app.config["PWD_HASH_ITERATIONS"])
     )
 
 def login_user(req_json, user):

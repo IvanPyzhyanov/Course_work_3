@@ -3,6 +3,7 @@ from flask_restx import abort, Namespace, Resource, reqparse
 from project.exceptions import ItemNotFound
 from project.services import MoviesService
 from project.setup_db import db
+from project.tools.security import auth_required, auth_check
 
 movies_ns = Namespace("movies")
 parser = reqparse.RequestParser()

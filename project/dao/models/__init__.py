@@ -2,7 +2,7 @@ from .movie import Movie
 from .director import Director
 from .user import User
 from .genre import Genre
-from .fav_movie import FavMovie
+from .fav_movie import FavoriteMovie
 
 
 __all__ = [
@@ -10,5 +10,5 @@ __all__ = [
     "Movie",
     "Director",
     "User",
-    "FavMovie",
+    "FavoriteMovie",
 ]

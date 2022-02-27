@@ -1,3 +1,4 @@
+from sqlalchemy import desc
 from sqlalchemy.orm.scoping import scoped_session
 
 from project.dao.models import Movie
