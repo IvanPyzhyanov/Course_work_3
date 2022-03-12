@@ -7,4 +7,6 @@ class User(db.Model):
     password = db.Column(db.String(255), nullable=False)
     name = db.Column(db.String(255))
     surname = db.Column(db.String(255))
-    favorite_genre = db.Column(db.String(255))
+    genre = db.relationship("Genre")
+    favorite_genre_id = db.Column(db.Integer, db.ForeignKey("genres.id"))
+    # favorite_genre = db.Column(db.Integer)

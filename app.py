@@ -1,6 +1,8 @@
 from project.config import DevelopmentConfig
 from project.dao.models import Genre, Movie, Director, Movie, User
 from project.server import create_app, db
+from flask_restx import Api
+
 
 app = create_app(DevelopmentConfig)
 
@@ -14,3 +16,7 @@ def shell():
         "Director": Director,
         "User": User,
     }
+
+
+if __name__ == '__main__':
+    app.run(host="localhost", port=10001, debug=True)
