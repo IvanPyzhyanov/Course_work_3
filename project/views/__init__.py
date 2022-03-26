@@ -12,5 +12,5 @@ __all__ = [
     "movies_ns",
     "users_ns",
     "favorite_movies_ns",
-    "auth",
+    "auth_ns",
 ]

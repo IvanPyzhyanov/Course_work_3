@@ -1,5 +1,5 @@
 from project.config import DevelopmentConfig
-from project.dao.models import Genre, Movie, Director, Movie, User
+from project.dao.models import Genre, Director, Movie, User, FavoriteMovie
 from project.server import create_app, db
 from flask_restx import Api
 

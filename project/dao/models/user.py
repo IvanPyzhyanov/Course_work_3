@@ -9,4 +9,9 @@ class User(db.Model):
     surname = db.Column(db.String(255))
     genre = db.relationship("Genre")
     favorite_genre_id = db.Column(db.Integer, db.ForeignKey("genres.id"))
-    # favorite_genre = db.Column(db.Integer)
+
+
+users_movies = db.Table('users_movies',
+    db.Column('user_id', db.Integer, db.ForeignKey('tag.id'), primary_key=True),
+    db.Column('movie_id', db.Integer, db.ForeignKey('page.id'), primary_key=True)
+)
