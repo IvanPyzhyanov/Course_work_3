@@ -2,6 +2,7 @@ from project.dao import MovieDAO
 from project.exceptions import ItemNotFound
 from project.schemas.movie import MovieSchema
 from project.services.base import BaseService
+from flask import current_app
 
 
 class MoviesService(BaseService):
@@ -23,4 +24,8 @@ class MoviesService(BaseService):
             offset = (filter_args.get("page") - 1) * limit
         status = filter_args.get("status")
         movies = MovieDAO(self._db_session).get_filter(limit=limit, offset=offset, status=status)
+        return MovieSchema(many=True).dump(movies)
+
+    def get_all(self):
+        movies = MovieDAO(self._db_session).get_all()
         return MovieSchema(many=True).dump(movies)

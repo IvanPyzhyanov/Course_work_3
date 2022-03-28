@@ -22,7 +22,7 @@ class MoviesView(Resource):
         if any(req_args.values()):
             return MoviesService(db.session).get_filter_movie(req_args)
         else:
-            return MoviesService(db.session).get_all_movies()
+            return MoviesService(db.session).get_all()
 
 
 @movies_ns.route("/<int:movie_id>")
